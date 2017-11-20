@@ -33,7 +33,8 @@ namespace Sitecore.Support.Data.Validators
         return null;
       }
       Item item = Database.GetItem(ItemUri);
-      if ((item == null) || (item.Versions.Count == 0))
+      // Added '&& item.Template.StandardValues.Versions.Count == 0' to fix the issue #192238
+      if ((item == null) || (item.Versions.Count == 0 && item.Template.StandardValues.Versions.Count == 0))
       {
         return null;
       }
